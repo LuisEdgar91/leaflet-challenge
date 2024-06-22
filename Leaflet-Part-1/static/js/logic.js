@@ -56,21 +56,16 @@ d3.json(earthquakeUrl).then(function(data) {
     legend.onAdd = function (map) {
         var div = L.DomUtil.create('div', 'info legend'),
             grades = [-10, 10, 30, 50, 70, 90],
-            labels = [],
-            from, to;
+            labels = [];
 
         div.innerHTML += '<h4>Depth</h4>';
 
         for (var i = 0; i < grades.length; i++) {
-            from = grades[i];
-            to = grades[i + 1];
-
-            labels.push(
-                '<i style="background:' + getColor(from + 1) + '"></i> ' +
-                from + (to ? '&ndash;' + to : '+'));
+            div.innerHTML +=
+                '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
 
-        div.innerHTML += labels.join('<br>');
         return div;
     };
 
